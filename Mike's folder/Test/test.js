@@ -6,12 +6,13 @@ app.get('/', function(req, res){
 });
 
 app.get('/aboutme', function(req, res){
-    res.send("i am mike");
+    res.send("<h1>i am mike</h1>");
 })
 
 app.post('/', function(req, res){
     res.send("you are using post");
 })
+app.use(express.static(__dirname+'/image'));
 
 app.listen(8080,'localhost', function(){
     console.log("started");
