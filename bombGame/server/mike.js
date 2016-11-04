@@ -5,8 +5,8 @@ exports.update=function(t){
   
     time = t;
 }
-exports.click = function(){
-    number+=1;
+exports.click = function(n){
+    number+=n;
 }
 
 exports.getNumber = function(){
