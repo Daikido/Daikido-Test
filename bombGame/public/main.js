@@ -1,7 +1,9 @@
 var socket = io();
 
-function click(){
-    socket.emit('click', {});
+function click(data){
+    socket.emit('click', data);
 }
 
-socket.on('update', update);
+socket.on('update', function(data){
+    update(data);
+};

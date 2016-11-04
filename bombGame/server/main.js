@@ -18,7 +18,7 @@ module.exports = function(io){
     return function(socket){
         
         socket.on('click', function(data){
-            mike.click();
+            mike.click(data);
         });
         
     }
