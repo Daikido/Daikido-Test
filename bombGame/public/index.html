@@ -5,10 +5,13 @@
     <title>多人踩地雷</title>
     <style>
         p#ok{color:#1abc9c;text-align:center;font-size:500%}
+        .btn {width: 100%; padding: 20px;}
     </style>
 </head>
 <body>
-    <p id="ok" onclick="click()"> 0</p>
+    <p id="ok"> 0</p>
+    <button type="button" id="btn" class="btn">Increase!</button>
+    <button type="button" id="btm" class="btn">Decrease!</button>
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="change.js"></script>
