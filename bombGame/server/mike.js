@@ -1,5 +1,13 @@
 var number=0;
-number-=0.1;
+var time=0;
+var minus=function(){
+    number-=0.1;
+}
+exports.update=function(t){
+    var delta = t-time;
+    number-=delta*0.01;
+    time = t;
+}
 exports.click = function(){
     number+=1;
 }
