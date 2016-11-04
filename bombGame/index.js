@@ -9,6 +9,6 @@ var io = require('socket.io')(server);
 app.use(express.static(__dirname+"/public"));
 
 
-io.on('connection', function(socket){
-    
-});
+var main = require('./server/main.js');
+
+io.on('connection', main(io));
