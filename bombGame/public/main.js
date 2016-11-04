@@ -6,4 +6,4 @@ function click(data){
 
 socket.on('update', function(data){
     update(data);
-};
+});
