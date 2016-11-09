@@ -13,16 +13,10 @@ var set = function (x, y, data) {
 var get = function (x, y) {
     return arr1[x][y];
 }
-var number=0;
-var time=0;
-exports.update=function(t){
-    var delta = t-time;
-    time = t;
-}
-exports.click = function(n){
-    number+=n;
-}
 
-exports.getNumber = function(){
-    return number;
-}
+
+
+set(0, 0, 5);
+set(0, 1, 6);
+if (get(0, 0) == 5)
+    if (get(0, 1) == 6) console.log("pass");
