@@ -21,7 +21,11 @@ function Chunk(map) {
     this.get = function (x, y) {
         return blocks[x][y];
     }
+    this.pack = function(getter){
+        return blocks.map(x=>x.map(getter));
+    }
 }
+
 function Map() {
     this.Columns = {};
     this.ChunkWidth = 32;
@@ -53,6 +57,21 @@ function Map() {
         blockX %= this.ChunkWidth;
         blockY %= this.ChunkHeight;
     }
+    this.pack = function (startChunkX, startChunkY, width, height, getter){
+        var output = {};
+        for(var i=0;i<width;i++){
+            var chunkX = i+startChunkX;
+            if(!this.Columns[chunkX]) continue;
+            var row = {};
+            for(var j=0;j<height;j++){
+                var chunkY = j + startChunkY;
+                if(!this.Columns[chunkX][chunkY]) continue;
+                row[chunkY] = this.Columns[chunkX][chunkY].pack(getter);
+                output[chunkX] = row;
+            }
+        }
+        return output;
+    }
 }
 modules.exports = function () {
     this.map = new Map();
@@ -62,4 +81,5 @@ modules.exports = function () {
     this.set = function (x, y, data) {
         this.map.getBlock(0, 0, x, y).data = data;
     }
+    this.pack = map.pack;
 }
