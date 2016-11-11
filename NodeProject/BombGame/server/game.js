@@ -14,15 +14,15 @@ function Chunk(map) {
     this.map = map;
     this.blocks = [];
     this.initBlocks = function (w, h) {
-        blocks = [...Array(w)], map(
+        this.blocks = [...Array(w)].map(
             x => [...Array(h)].map(
                 y => new Block(this)));
     }
     this.get = function (x, y) {
-        return blocks[x][y];
+        return this.blocks[x][y];
     }
-    this.pack = function(getter){
-        return blocks.map(x=>x.map(getter));
+    this.pack = function (getter) {
+        return this.blocks.map(x => x.map(getter));
     }
 }
 
@@ -31,7 +31,9 @@ function Map() {
     this.ChunkWidth = 32;
     this.ChunkHeight = 32;
     this.chunkExists = function (chunkX, chunkY) {
-        if (!this.Columns[chunkX] || !this.Columns[chunkX][chunkY]) return false;
+        if (
+            this.Columns[chunkX] == undefined ||
+            this.Columns[chunkX][chunkY] == undefined) return false;
         return true;
     }
     this.create = function (chunkX, chunkY) {
@@ -40,7 +42,7 @@ function Map() {
         this.Columns[chunkX][chunkY].initBlocks(32, 32);
     }
     this.get = function (chunkX, chunkY) {
-        if (!this.chunkExists()) this.create(chunkX, chunkY);
+        if (!this.chunkExists(chunkX, chunkY)) this.create(chunkX, chunkY);
         return this.Columns[chunkX][chunkY];
     }
     this.getBlock = function (chunkX, chunkY, blockX, blockY) {
@@ -56,16 +58,18 @@ function Map() {
         chunkY += Math.floor(blockY / this.ChunkHeight);
         blockX %= this.ChunkWidth;
         blockY %= this.ChunkHeight;
+
+        return this.get(chunkX, chunkY).get(blockX, blockY);
     }
-    this.pack = function (startChunkX, startChunkY, width, height, getter){
+    this.pack = function (startChunkX, startChunkY, width, height, getter) {
         var output = {};
-        for(var i=0;i<width;i++){
-            var chunkX = i+startChunkX;
-            if(!this.Columns[chunkX]) continue;
+        for (var i = 0; i < width; i++) {
+            var chunkX = i + startChunkX;
+            if (this.Columns[chunkX] == undefined) continue;
             var row = {};
-            for(var j=0;j<height;j++){
+            for (var j = 0; j < height; j++) {
                 var chunkY = j + startChunkY;
-                if(!this.Columns[chunkX][chunkY]) continue;
+                if (this.Columns[chunkX][chunkY] == undefined) continue;
                 row[chunkY] = this.Columns[chunkX][chunkY].pack(getter);
                 output[chunkX] = row;
             }
@@ -73,7 +77,8 @@ function Map() {
         return output;
     }
 }
-modules.exports = function () {
+
+module.exports = function () {
     this.map = new Map();
     this.get = function (x, y) {
         return this.map.getBlock(0, 0, x, y).data;
@@ -81,5 +86,7 @@ modules.exports = function () {
     this.set = function (x, y, data) {
         this.map.getBlock(0, 0, x, y).data = data;
     }
-    this.pack = map.pack;
+    this.pack = function (startChunkX, startChunkY, width, height, getter) {
+        return this.map.pack(startChunkX, startChunkY, width, height, getter);
+    }
 }
