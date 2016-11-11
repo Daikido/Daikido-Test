@@ -1,3 +1,6 @@
+var game = require('./game.js');
+
+
 modules.exports = function (io) {
     
     return function(socket){
