@@ -16,19 +16,19 @@ var get = function (x, y) {
 }
 for (var i = 0; i < 10; i++) {
     for (var j = 0; j < 10; j++) {
-        set(i, j, 0);
+        set(i, j, -4);
     }
 }
 for (var i = 0; i < 70; i++) {
     var bombx = Math.floor(Math.random() * 10);
     var bomby = Math.floor(Math.random() * 10);
-    set(bombx, bomby, 1);
+    set(bombx, bomby, -1);
 }
 var test = function (x, y) {
     var a = 0;
     for (var i = -1; i < 2; i++) {
         for (var j = -1; j < 2; j++) {
-            if (get(x + i, y + j))
+            if (get(x + i, y + j)===-1||get(x+i,y+j)===-2)
                 a += 1;
         }
     }
@@ -39,13 +39,40 @@ function loseGame(){
     confirm("You are lose !!!");
 }
 var clickBomb=function(x,Y){
-    if(get(x,y))
-        return loseGame;
-    else
-        set(x,y,test(x,y))  
+    switch(arr1[x][y]){
+        case -1:
+            return loseGame;
+            break;
+        case -4:
+            set(x,y,test(x,y));
+            break;//有可能點開是白不是數字
+        default:
+            set(x,y,get(x,y));
+            break;
+    }
 }
 var setFlag=function(x,y){
-    set(x,y,2);
+    if(get(x,y)===-1)
+        set(x,y,-2);
+    else
+        set(x,y,-3);
+}
+var hint=function(x,y){
+     var a = 0;
+    for (var i = -1; i < 2; i++) {
+        for (var j = -1; j < 2; j++) {
+            if (get(x + i, y + j)===-2)//有可能玩家設錯旗子arr[x][y]=-3
+                a += 1;
+        }
+    }
+    if(a===test(x,y)){
+          for (var k = -1; k < 2; k++) {
+        for (var l = -1; l < 2; l++) {
+            if (get(x + k, y + l)!==-2&&get(x + k, y + l)===-4)
+               set(x,y,test(x,y));//還沒完成
+        }
+    }
+    }
 }
 function pad(s, l){
     s = s.toString();
