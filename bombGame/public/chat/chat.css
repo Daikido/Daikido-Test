@@ -1,11 +1,11 @@
-.chatBoxRow{
+.chatBoxRow{    /* 視窗底部橫列 */
     position: absolute;
     bottom: 16px;
 }
-.chatBox{
+.chatBox{       /* 單個對話視窗 */
     position: relative;
     float: left;
-    font-family: 微軟正黑體 ,Arial, Helvetica, sans-serif;
+    font-family: '微軟正黑體' ,Arial, Helvetica, sans-serif;
     border: solid black;
     width: 256px;
     height: 100%;
@@ -13,33 +13,33 @@
     margin: 4px;
 }
 
-.chatBox .head{
+.chatBox .head{ /* 對話視窗標頭列 */
     color: white;
     text-align: center;
     height: 32px;
     background-color: black;
 }
 
-.chatBox .head p{
+.chatBox .head p{   /* 對話視窗標頭文字 */
     margin: 0px;
     line-height: 32px;
     text-align: center;
     vertical-align: middle;
 }
 
-.chatBox .body{
+.chatBox .body{     /* 對話視窗本體 */
     background-color: white;
     padding: 4px;
     height: 256px;
     overflow: auto;
     background-color:#ddd;
 }
-.chatBox .body .line{
+.chatBox .body .line{   /* 對話視窗本體整行 */
     position: relative;
     margin: 4px;
 }
 
-.chatBox .body .line .block{
+.chatBox .body .line .block{ /* 對話視窗本體單行區塊 */
     word-wrap: break-word;
     width: fit-content;
     max-width: 66%;
@@ -49,30 +49,30 @@
 }
 
 
-.chatBox .body .line .block.left{
+.chatBox .body .line .block.left{   /* 對話視窗本體單行區塊靠左 */
     border-left: solid black;
     margin-left: 0px;
     margin-right: auto;
 }
-.chatBox .body .line .block.right{
+.chatBox .body .line .block.right{  /* 對話視窗本體單行區塊靠右 */
     border-right: solid black;
     margin-left: auto;
     margin-right: 0px;
     text-align: right;
 }
-.chatBox .body .line .title{
+.chatBox .body .line .title{    /* 對話視窗本體單行標題 */
     text-align: left;
     font-weight: bold;
     border-bottom: solid 1px orange;
 }
 
-.chatBox .foot{
+.chatBox .foot{     /* 對話視窗結尾 */
     background-color: white;
     overflow: hidden;
     height: 32px;
 }
 
-.chatBox input{
+.chatBox input{ /* 輸入框 */
     border: none;
     width: 100%;
     height: 100%;
