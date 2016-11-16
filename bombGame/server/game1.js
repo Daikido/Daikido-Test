@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var players = {};
 function Player(name) {
     this.name = name;
@@ -61,4 +62,5 @@ if(a===0){
         players[i].result="nextRound";
     }
 }
+
 };
