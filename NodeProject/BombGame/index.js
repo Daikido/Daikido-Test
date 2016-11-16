@@ -9,5 +9,5 @@ var io = require('socket.io')(server);
 var main = require('./server/main.js');
 io.on('connection', main(io));
 
-server.listen(3000);
+server.listen(25565);
 console.log("server is running");
