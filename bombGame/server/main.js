@@ -16,8 +16,9 @@ module.exports = function(io){
     
     // socket handle
     return function(socket){
-        
+        console.log('connection');
         socket.on('click', function(data){
+            console.log(data);
             mike.click(data);
         });
         
