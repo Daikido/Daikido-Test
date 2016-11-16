@@ -2,17 +2,20 @@ var game = require('./game1.js');
 
 module.exports = function (io) {
     // timer handle
-    
+    var ingame = false;
     function start(){
-        game.start();
+        if(ingame) return false;
+        if(!game.start()) return false;
+        ingame = true;
         io.emit('start');
         setTimeout(stop, 10000);
+        return true;
     }
 
     function stop(){
         var result = game.stop();
         io.emit('stop', result);
-        
+        ingame = false;
     }
 
     // socket handle
@@ -39,6 +42,7 @@ module.exports = function (io) {
 
         socket.on('message', function (data) {
             if(socket.user.online) return;
+            if(ingame) io.emit('message', {name: socket.user.name, message: data.message});
             io.sockets.filter(s=>s.user.name==data.name).map(function(s){
                 s.emit('message', {name: socket.user.name, message: data.message});
             });
