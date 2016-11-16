@@ -6,13 +6,12 @@
     position: relative;
     float: left;
     font-family: '微軟正黑體' ,Arial, Helvetica, sans-serif;
-    border: solid black;
     width: 256px;
     height: 100%;
     background-color: black;
     margin: 4px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
-
 .chatBox .head{ /* 對話視窗標頭列 */
     color: white;
     text-align: center;
@@ -45,7 +44,7 @@
     max-width: 66%;
     background-color: white;
     padding: 4px 8px;
-    box-shadow: 0px 4px 12px #bbb;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -58,7 +57,6 @@
     border-right: solid black;
     margin-left: auto;
     margin-right: 0px;
-    text-align: right;
 }
 .chatBox .body .line .title{    /* 對話視窗本體單行標題 */
     text-align: left;
