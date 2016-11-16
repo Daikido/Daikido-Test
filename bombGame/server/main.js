@@ -30,6 +30,7 @@ module.exports = function (io) {
             if(result=="success") {
                 socket.user.name = data.name;
                 socket.user.online = true;
+                io.emit('player', socket.user.name);
             }
 
             socket.emit('join', result);
