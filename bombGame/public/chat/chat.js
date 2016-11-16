@@ -10,7 +10,6 @@ function ChatSystem(elementId) {
         var ele = document.createElement(tagName);
         if (options != undefined)
             for (var i in options) ele[i] = options[i];
-        if (callback != undefined) callback(ele);
         return ele;
     }
 
