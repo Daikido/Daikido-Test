@@ -1,9 +1,18 @@
 var socket = io();
 
-function click(data){
-    socket.emit('click', data);
+function join(name){
+    socket.emit('join', {name: name});
 }
 
-socket.on('update', function(data){
-    update(data);
+function click(){
+    socket.emit('click');
+}
+
+function say(name, message){
+    socket.emit('message', {name: name, message: message});
+}
+
+socket.on('message', function(data){
+    if(data.command=="leave") leave(data.name);
+    else message(data.name, data.message);
 });
