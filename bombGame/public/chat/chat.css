@@ -1,0 +1,76 @@
+.chatBoxRow{
+    position: absolute;
+    bottom: 16px;
+}
+.chatBox{
+    position: relative;
+    float: left;
+    font-family: 微軟正黑體 ,Arial, Helvetica, sans-serif;
+    border: solid black;
+    width: 256px;
+    height: 100%;
+    background-color: black;
+    margin: 4px;
+}
+
+.chatBox .head{
+    color: white;
+    text-align: center;
+    height: 32px;
+    background-color: black;
+}
+
+.chatBox .head p{
+    margin: 0px;
+    line-height: 32px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.chatBox .body{
+    background-color: white;
+    padding: 4px;
+    height: 256px;
+    overflow: auto;
+    background-color:#ddd;
+}
+.chatBox .body .line{
+    position: relative;
+    margin: 4px;
+}
+
+.chatBox .body .line .block{
+    width: fit-content;
+    max-width: 66%;
+    background-color: white;
+    padding: 4px 8px;
+    box-shadow: 0px 4px 12px lightgray;
+}
+.chatBox .body .line .title{
+    font-weight: bold;
+    border-bottom: solid 1px orange;
+}
+.chatBox .body .line .content{
+    
+}
+.left{
+    border-left: solid black;
+    margin-left: 0px;
+    margin-right: auto;
+}
+.right{
+    border-right: solid black;
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.chatBox .foot{
+    background-color: white;
+    height: 32px;
+}
+
+.chatBox input{
+    border: none;
+    width: 100%;
+    height: 30px;
+}
