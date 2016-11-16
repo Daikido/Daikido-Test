@@ -32,7 +32,7 @@ function ChatSystem(elementId) {
         var title = dom('p', { textContent: name });    // 標投文字
         var body = dom('div', { className: "body" });   // 主體
         var foot = dom('div', { className: "foot" });   // 結尾
-        var input = dom('input', { type: "text" });     // 輸入框
+        var input = dom('input', { type: "text", placeholder:"輸入訊息..." });     // 輸入框
         box.appendChild(head);
         box.appendChild(body);
         box.appendChild(foot);
