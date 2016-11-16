@@ -10,5 +10,5 @@ app.use(express.static(__dirname+"/public"));
 var main = require('./server/main.js');
 
 io.on('connection', main(io));
-server.listen(25565);
+server.listen(3000);
 console.log("server is running");

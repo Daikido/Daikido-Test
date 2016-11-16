@@ -64,7 +64,7 @@ function findData(x, y, data) {
     var a = 0
     for (var i = -1; i < 2; i++) {
         for (var j = -1; j < 2; j++) {
-            if (get(x + i; j + j) === data)
+            if (get(x + i, j + j) === data)
                 a += 1;
         }
     }
