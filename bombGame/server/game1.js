@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var players = {};
 function Player(name) {
     this.name = name;
