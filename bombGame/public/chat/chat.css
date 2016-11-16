@@ -40,6 +40,7 @@
 }
 
 .chatBox .body .line .block{
+    word-wrap: break-word;
     width: fit-content;
     max-width: 66%;
     background-color: white;
@@ -64,9 +65,7 @@
     font-weight: bold;
     border-bottom: solid 1px orange;
 }
-.chatBox .body .line .block.right .title{
-    display: none;
-}
+
 .chatBox .foot{
     background-color: white;
     overflow: hidden;

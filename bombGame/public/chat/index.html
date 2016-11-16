@@ -8,20 +8,97 @@
 </head>
 
 <body>
+    <!--
     <div class="chatBoxRow">
-
         <div class="chatBox">
             <div class="head">
                 <p>聊天室1</p>
             </div>
             <div class="body">
+                <div class="line">
+                    <div class="block left">
+                        <span class="title">hans</span>
+                        <span class="content">hello</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="block right">
+                        <span class="title">james</span>
+                        <span class="content">hello</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="block left">
+                        <span class="title">hans</span>
+                        <span class="content">hello</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="block right">
+                        <span class="title">james</span>
+                        <span class="content">hello</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="block left">
+                        <span class="title">hans</span>
+                        <span class="content">hello</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="block right">
+                        <span class="title">james</span>
+                        <span class="content">hello</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="block left">
+                        <span class="title">hans</span>
+                        <span class="content">hello</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="block left">
+                        <span class="title">hans</span>
+                        <span class="content">你好你好你好你好你好</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="block right">
+                        <span class="title">james</span>
+                        <span class="content">wefwefwefwefwefwefwefwefwefwefwef</span>
+                    </div>
+                </div>
             </div>
             <div class="foot">
                 <input type="text">
             </div>
         </div>
-
+        <div class="chatBox">
+            <div class="head">
+                <p>聊天室1</p>
+            </div>
+            <div class="body">
+                <div class="line">
+                    <div class="block left">
+                        <span class="title">hans</span>
+                        <span class="content">hello</span>
+                    </div>
+                </div>
+            </div>
+            <div class="foot">
+                <input type="text">
+            </div>
+        </div>
     </div>
+    -->
+    <div class="chatBoxRow" id="chat"></div>
 </body>
-
+<script src="chat.js"></script>
+<script>
+    var chat = new ChatSystem("chat");
+    chat.NewRoom("Hans");
+    chat.NewRoom("Just");
+    chat.NewRoom("Mike");
+</script>
 </html>
