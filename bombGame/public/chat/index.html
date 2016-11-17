@@ -4,101 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="popout.css">
     <title>Document</title>
 </head>
 
 <body>
-    <!--
-    <div class="chatBoxRow">
-        <div class="chatBox">
-            <div class="head">
-                <p>聊天室1</p>
-            </div>
-            <div class="body">
-                <div class="line">
-                    <div class="block left">
-                        <span class="title">hans</span>
-                        <span class="content">hello</span>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="block right">
-                        <span class="title">james</span>
-                        <span class="content">hello</span>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="block left">
-                        <span class="title">hans</span>
-                        <span class="content">hello</span>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="block right">
-                        <span class="title">james</span>
-                        <span class="content">hello</span>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="block left">
-                        <span class="title">hans</span>
-                        <span class="content">hello</span>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="block right">
-                        <span class="title">james</span>
-                        <span class="content">hello</span>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="block left">
-                        <span class="title">hans</span>
-                        <span class="content">hello</span>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="block left">
-                        <span class="title">hans</span>
-                        <span class="content">你好你好你好你好你好</span>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="block right">
-                        <span class="title">james</span>
-                        <span class="content">wefwefwefwefwefwefwefwefwefwefwef</span>
-                    </div>
-                </div>
-            </div>
-            <div class="foot">
-                <input type="text">
-            </div>
-        </div>
-        <div class="chatBox">
-            <div class="head">
-                <p>聊天室1</p>
-            </div>
-            <div class="body">
-                <div class="line">
-                    <div class="block left">
-                        <span class="title">hans</span>
-                        <span class="content">hello</span>
-                    </div>
-                </div>
-            </div>
-            <div class="foot">
-                <input type="text">
-            </div>
-        </div>
-    </div>
-    -->
     <div class="chatBoxRow" id="chat"></div>
 </body>
+<script src="/socket.io/socket.io.js"></script>
 <script src="chat.js"></script>
+<script src="popout.js"></script>
 <script>
     var chat = new ChatSystem("chat");
     chat.NewRoom("Hans");
     chat.NewRoom("Just");
     chat.NewRoom("Mike");
+    var status;
+    new Popout("取個名字吧", function(result, data, save){
+        console.log(result, data);
+        if(result=="yes" && data.name.length>0){
+            new Popout("成功登入")
+            .bodyText("歡迎")
+            .bodyText(data.name)
+            .footButton("加入").show();
+            return;
+        }
+        save.s.textContent = "沒打名字不能玩qq";
+        return "show";
+    })
+    .bodyText("來個與眾不同的名字：")
+    .bodyInput("text", "name")
+    .bodyText("").save("s")
+    .footText("選好了嗎？")
+    .footButton("確定" , "yes")
+    .footButton("取消" , "no")
+    .show();
+
 </script>
+
 </html>

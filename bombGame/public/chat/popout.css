@@ -1,0 +1,126 @@
+.popout{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 90;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    animation: popout-fade-bg 0.66s ease;
+    transition: all 1s ease;
+}
+
+.popout.hide{
+    transition: all 0.33s ease;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.popout .area{
+    margin: 0;
+    position: relative;
+    top: 50%;
+    width: 100%;
+    transform: translate(0, -50%);
+    background: white;
+    box-shadow: 12px 0px 36px rgba(0, 0, 0, 0.2);
+    animation: popout-fade 0.2s ease;
+    max-height: 100%;
+    overflow: hidden;
+    transition: all 0.33s ease-in;
+}
+
+.popout.hide .area{
+    transition: all 0.33s ease;
+    transition-delay: 0.33s;
+    opacity: 0;
+}
+
+.popout .middle{
+    background-color: transparent;
+    margin: 0;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%, 0);
+    max-width: 800px;
+    transition: all 0.33s ease-out;
+}
+.popout.hide .middle{
+    transform: translate(-100%, 0);
+    transition: all 0.33s ease-in;
+    opacity: 0;
+}
+.popout .middle .head{
+    border-top: solid 4px orange;
+    font-size: 48px;
+    border-bottom: solid 1px lightgray;
+    animation: popout-slide 0.33s ease;
+    
+}
+
+.popout .middle .body{
+    font-size: 24px;
+    padding: 16px;
+    animation: popout-slide 0.66s ease;
+    line-height: 24px;
+    max-height: 300px;
+    overflow-y: auto;
+    
+    border-bottom: solid 1px lightgray;
+}
+
+.popout .middle .foot{
+    text-align: right;
+    font-size: 24px;
+    padding: 16px;
+    animation: popout-slide 0.77s ease;    
+}
+
+.popout button{
+    margin: 4px;
+    padding: 8px 16px;
+    background-color: lightgray;
+    border: none;
+    font-size: 16px;
+    border-radius: 16px;
+}
+.popout button:active{
+    background-color: orange;
+    color: white;
+}
+
+.popout input{
+    margin: 4px;
+    padding:  8px 16px;
+}
+
+@keyframes popout-slide{
+    from{
+        opacity: 0;
+        transform: translate(100%,0px);
+    }
+    to{
+        opacity: 1;
+        transform: translate(0,0);
+    }
+}
+
+@keyframes popout-fade{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes popout-fade-bg{
+    from{
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to{
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
