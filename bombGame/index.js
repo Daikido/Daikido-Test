@@ -8,7 +8,9 @@ app.use(express.static(__dirname+"/public"));
 
 
 var main = require('./server/main.js');
-
-io.on('connection', main(io));
+var chatServer = require('./server/chatServer.js');
+io.on('connection', function(socket){
+    chatServer.connection(io)(socket);
+});
 server.listen(25565);
 console.log("server is running");

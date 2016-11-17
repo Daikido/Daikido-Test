@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="chat.css">
     <link rel="stylesheet" href="popout.css">
-    <title>Document</title>
+    <title>chat</title>
 </head>
 
 <body>
@@ -15,30 +15,58 @@
 <script src="chat.js"></script>
 <script src="popout.js"></script>
 <script>
+    
+
+    var socket = io();
+    var servertime = null;
+    socket.on('serverTime', function(data){
+        if(servertime==null) servertime = data;
+        if(servertime!=data) location.reload(); 
+    });
+
     var chat = new ChatSystem("chat");
-    chat.NewRoom("Hans");
-    chat.NewRoom("Just");
-    chat.NewRoom("Mike");
-    var status;
-    new Popout("取個名字吧", function(result, data, save){
+    chat.connect(socket);
+
+    var myName;
+    var namePop = new Popout("取個名字吧", function(result, data, save){
         console.log(result, data);
         if(result=="yes" && data.name.length>0){
-            new Popout("成功登入")
-            .bodyText("歡迎")
-            .bodyText(data.name)
-            .footButton("加入").show();
+            socket.emit('join', data.name);
             return;
         }
         save.s.textContent = "沒打名字不能玩qq";
         return "show";
     })
-    .bodyText("來個與眾不同的名字：")
-    .bodyInput("text", "name")
-    .bodyText("").save("s")
-    .footText("選好了嗎？")
-    .footButton("確定" , "yes")
-    .footButton("取消" , "no")
-    .show();
+    .bodyText("你與眾不同的名字：").bodyInput("text", "name").bodyText("").save("s")
+    .footText("選好了嗎？").footButton("確定" , "yes").footButton("取消" , "no").show();
+
+
+    socket.on('join', function(data){
+        if(data.result=="namerepeat") {
+            namePop.saves.s.textContent = "名字重複了"
+            namePop.show();
+            return;
+        }
+        if(data.result=="full") {
+            new Popout.show("GG").bodyText("已經客滿了耶").footButton("我知道了").show();
+            return;
+        }
+        myName = data.name;
+        chat.setName(myName);
+        document.title = myName+" chat";
+        new Popout("歡迎")
+        .bodyText("開始聊天吧")
+        .bodyText(myName)
+        .footButton("GO").show();
+    });
+
+    socket.on('broadcast', function(data){
+        var popout = new Popout(data.title);
+        data.content.map(x=>popout.bodyText(x));
+        popout.footButton("我知道了","yes");
+        popout.show();
+    });
+    
 
 </script>
 

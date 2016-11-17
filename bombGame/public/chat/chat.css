@@ -1,6 +1,6 @@
 .chatBoxRow{    /* 視窗底部橫列 */
     position: absolute;
-    bottom: 16px;
+    top: 16px;
 }
 .chatBox{       /* 單個對話視窗 */
     position: relative;
@@ -46,33 +46,45 @@
     word-wrap: break-word;
     width: fit-content;
     max-width: 66%;
-    background-color: white;
+    background-color: transparent;
     padding: 8px 8px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     
-    animation-name: chatBox-blockAppear;
-    animation-duration: 0.5s;
+    
 }
 
-@keyframes chatBox-blockAppear{
+.chatBox .body .line .block .bg{
+    display: block;
+    position: absolute;
+    
+}
+
+.chatBox .body .line .info{ /* 對話視窗本體單行區塊 */
+    text-align: center;
+    border-top: solid 1px black;
+    padding: 4px;
+}
+
+@keyframes chatBox-bgAppear{
     from{
         max-width: 0%;
-        overflow: hidden;
         white-space: pre;
+        overflow: hidden;
     }
     to{
-        max-width: 66%;
-        overflow: hidden;
+        max-width: 100%;
         white-space: pre;
+        overflow: hidden;
     }
 }
 
-.chatBox .body .line .block.left{   /* 對話視窗本體單行區塊靠左 */
+.chatBox .body .line .block.left {   /* 對話視窗本體單行區塊靠左 */
     margin-left: 0px;
     margin-right: auto;
     border-radius: 0px 8px 8px 8px;
+    background-color: white;
 }
-.chatBox .body .line .block.right{  /* 對話視窗本體單行區塊靠右 */
+.chatBox .body .line .block.right {  /* 對話視窗本體單行區塊靠右 */
     margin-left: auto;
     margin-right: 0px;
     border-radius: 8px 8px 0px 8px;
@@ -98,4 +110,5 @@
     height: 100%;
     max-width: 100%;
     padding: 0px 8px;
+    left: 0px;
 }

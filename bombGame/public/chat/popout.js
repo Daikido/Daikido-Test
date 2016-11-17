@@ -1,23 +1,3 @@
-/*
-<div class="popout">
-    <div class="area">
-        <div class="middle">
-            <div class="head">
-                <p>取個名字吧</p>
-            </div>
-            <div class="body">
-                <p>來個與眾不同的名字?</p>
-                <input type="text">
-            </div>
-            <div class="foot">
-                <button>確定</button>
-            </div>
-        </div>
-    </div>
-</div>
-*/
-
-
 function Popout(title, callback){
     function dom(tagName, options) {
         var ele = document.createElement(tagName);
@@ -47,10 +27,12 @@ function Popout(title, callback){
         opened = true;
         document.body.appendChild(element);
         element.classList.remove("hide");
+        return this;
     }
 
     this.hide = function(){
         element.classList.add("hide");
+        return this;
     }
 
     this.close = function(){
@@ -59,6 +41,7 @@ function Popout(title, callback){
         setTimeout(function(){
             if(!opened) document.body.removeChild(element);
         }, 660);
+        return this;
     }
 
     var close = this.close;
