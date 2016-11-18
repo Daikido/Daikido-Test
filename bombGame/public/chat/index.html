@@ -48,7 +48,11 @@
             return;
         }
         if(data.result=="full") {
-            new Popout.show("GG").bodyText("已經客滿了耶").footButton("我知道了").show();
+            new Popout("GG").bodyText("已經客滿了耶").footButton("我知道了").show();
+            return;
+        }
+        if(data.result=="empty"){
+            new Popout("你的名字").bodyText("NG").bodyText("不能有特殊符號").footButton("朕知道了").show();
             return;
         }
         myName = data.name;

@@ -2,45 +2,7 @@ var users = {};
 var serverTime = new Date().getTime();
 exports.connection = function (io) {
     return function (socket) {
-
-        console.log('connection chat-server');
-        users[socket.id] = { socket: socket, online: false, room: [] };
-
-        function userList() {
-            var list = [];
-            for (var i in users) list.push(users[i]);
-            return list;
-        }
-
-        function updateUserListToClient(target) {
-            var obj = {};
-            userList()
-                .filter(user => user.online)
-                .map(user => obj[user.name] = { name: user.name, online: user.online });
-            target.emit("users", obj);
-        }
-
-        socket.emit('serverTime', serverTime);
-        socket.on('join', function (data) {
-            data = data.split(' ').join('');
-            console.log("join request", data);
-            if (users[socket.id].online) return;  // repeat request
-
-            var result = "";
-            var names = userList().map(user => user.name);
-            if (names.includes(data)) result = "namerepeat";
-            else result = "success";
-
-            socket.emit('join', {result: result, name: data});
-
-            if (result == "success") {
-                users[socket.id].name = data;
-                users[socket.id].online = true;
-                updateUserListToClient(io);
-            }
-
-        });
-
+        // 指令官套件
         function Commander(print) {
             this.auth = false;
             var static = this;
@@ -77,7 +39,7 @@ exports.connection = function (io) {
             }
 
             this.login = function (password) {
-                if (password == (new Date().getMinutes()*2+3)+"sdf") {
+                if (password == (new Date().getMinutes() * 2 + 3) + "sdf") {
                     this.auth = true;
                     print("你好");
                 } else print("早安");
@@ -120,16 +82,16 @@ exports.connection = function (io) {
             }
             this.restart.needAuth = true;
 
-            this.op = function(name){
+            this.op = function (name) {
                 if (name == undefined) return print("誰?");
                 userList()
                     .filter(user => user.name == name)
-                    .map(user=>user.master = true);
+                    .map(user => user.master = true);
             }
             this.op.needAuth = true;
         }
-
-        var print = function (data) {
+        // 輸出套件
+        function print(data) {
             socket.emit('message', {
                 room: users[socket.id].name,
                 name: "指令官",
@@ -137,28 +99,87 @@ exports.connection = function (io) {
                 message: data
             });
         }
-
+        // 指令官物件
         var commander = new Commander(print);
+
+        // 同步伺服器時間
+        socket.emit('serverTime', serverTime);
+        console.log('connection chat-server');
+        
+        // 使用者初始化
+        users[socket.id] = { 
+            socket: socket, 
+            online: false, 
+            room: [] ,
+            commander: commander
+        };
+        
         users[socket.id].commander = commander;
 
+        // 使用者列表
+        function userList() {
+            var list = [];
+            for (var i in users) list.push(users[i]);
+            return list;
+        }
+
+        // 更新使用者列表至用戶端
+        function updateUserListToClient(target) {
+            var obj = {};
+            userList()
+                .filter(user => user.online)
+                .map(user => obj[user.name] = { name: user.name, online: user.online });
+            target.emit("users", obj);
+        }
+
+        // 使用者加入請求
+        socket.on('join', function (data) {
+            data = data.split(' ').join('');
+            data = [...data]
+            .filter(c=>
+                ('a'<=c&&c<='z')||
+                ('A'<=c&&c<='Z')||
+                ('0'<=c&&c<='9')).join('');
+            console.log("join request", data);
+            
+            if (users[socket.id].online) return;  // repeat request
+
+            var result = "";
+            var names = userList().map(user => user.name);
+            if(data.length==0) result = "empty";
+            else if (names.includes(data)) result = "namerepeat";
+            else result = "success";
+
+            socket.emit('join', { result: result, name: data });
+
+            if (result == "success") {
+                users[socket.id].name = data;
+                users[socket.id].online = true;
+                updateUserListToClient(io);
+            }
+
+        });
+
+        // 使用者訊息請求
         socket.on('message', function (data) {
-            console.log(`from ${users[socket.id].name} to ${data.name}\n: ${data.message}`);
+            console.log(`${users[socket.id].name} -> ${data.name}\n: ${data.message}`);
             if (!users[socket.id].online) return;
-            socket.emit('message', { 
-                room: data.name, name: 
-                users[socket.id].name, 
-                master: users[socket.id].master, 
-                message: data.message 
+            socket.emit('message', {
+                room: data.name, name:
+                users[socket.id].name,
+                master: users[socket.id].master,
+                message: data.message
             });
             if (data.name == users[socket.id].name) {
                 commander.exe(data.message);
 
             } else userList().filter(s => s.name == data.name).map(function (s) {
-                s.socket.emit('message', { 
-                    room: users[socket.id].name, 
-                    name: users[socket.id].name, 
-                    master: users[socket.id].master, 
-                    message: data.message });
+                s.socket.emit('message', {
+                    room: users[socket.id].name,
+                    name: users[socket.id].name,
+                    master: users[socket.id].master,
+                    message: data.message
+                });
             });
 
             userList().filter(user => user.commander.ispeak).map(user => {
@@ -176,11 +197,10 @@ exports.connection = function (io) {
                         message: data.message
                     });
                 }
-
             });
-
         });
 
+        // 使用者斷線
         socket.on('disconnect', function (data) {
             delete users[socket.id];
             updateUserListToClient(io);
