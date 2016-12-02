@@ -1,0 +1,7 @@
+{
+    "name":"student",
+    "attributes":[
+        {"name":"name", "type":"string"},
+        {"name":"score", "type":"number"}
+    ]
+}
