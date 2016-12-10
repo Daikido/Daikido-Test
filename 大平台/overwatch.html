@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="overwatch.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+</head>
+<body>
+<div id="otter"></div>
+
+<div id="selection">
+<ul>
+    <li><a href="">tutorABC</a></li>
+    <li><a href="">Voicetube</a></li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
+        <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </li>
+</ul>
+</div>
+<div style="clear:both"></div>
+
+<div id="toolist">
+    <div class="thead"><P>TEST</P></div>
+    <div id="tooler">
+<table>
+  <tr>
+    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i><span>fsaf</span></td>
+    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i><span>fsaf</span></td>
+  </tr>
+  <tr>
+    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i></td>
+    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i></td>
+  </tr>
+  <tr>
+    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i></td>
+    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i></td>
+  </tr>
+</table>
+    </div>
+</div>
+
+<div id="content"></div>
+<div id="popup">
+    <div id="phead" onclick="popup()">
+        <div id="aa">TEST</div>
+        <div id="a">✕</div>
+        <div style="clear:both"></div>
+    </div>
+</div>
+<div id="attr" onclick="popup()"></div>
+</body>
+<script>
+function popup() {
+   var x=document.getElementById('popup');
+   if(x.style.display==='block'){
+       x.style.display='none';}
+   else {x.style.display='block';}
+}
+</script>
+</html>
