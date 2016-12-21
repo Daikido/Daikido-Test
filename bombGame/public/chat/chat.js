@@ -15,12 +15,18 @@ function ChatSystem(elementId) {
     }
 
     // 取得對話單行元素 name:對話傳送者 content:傳送內容 self:是否是自己(決定文字靠右或靠左)
-    function getLineElement(name, content, self, master) {
+    function getLineElement(name, message, self, master) {
         var div = dom('div', { className: "line" });
         var bg = dom('div', { className: "bg" });
         var block = dom('div', {className: "block " + (self ? "right" : "left")});
+        
         var title = dom('span', {className:"title", textContent:name});
-        var content = dom('span', {className:"content", textContent:"："+content});
+        var content = dom('span', {className:"content", textContent:"："+message});
+        
+        if(message.substr(0,4)=='img '){
+            content = dom('img', {src:message.substr(4)});
+        }
+        
         if(master===true) title.style.borderBottomColor = "green";
         block.appendChild(bg);
         block.appendChild(title);

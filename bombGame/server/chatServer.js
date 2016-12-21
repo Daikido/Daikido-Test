@@ -5,6 +5,7 @@ exports.connection = function (io) {
         // 指令官套件
         function Commander(print) {
             this.auth = false;
+            
             var static = this;
             function isCommand(command) {
                 var result = !(static[command] == undefined ||
@@ -54,7 +55,7 @@ exports.connection = function (io) {
                 io.emit('broadcast', { title: title, content: content.split('\\n') });
             }
             this.broadcast.needAuth = true;
-
+            
             this.cast = function (name, title, content) {
                 if (title == undefined) return print("我不知道你要說什麼");
                 if (content == undefined) {
@@ -72,7 +73,7 @@ exports.connection = function (io) {
                 if (on == undefined) this.ispeak = !this.ispeak;
                 else this.ispeak = on == true;
             }
-            this.peak.needAuth = true;
+            //this.peak.needAuth = true;
 
             this.restart = function (name) {
                 if (name == undefined) io.emit('serverTime', 'error');
@@ -81,14 +82,24 @@ exports.connection = function (io) {
                     .map(user => user.socket.emit('serverTime', 'error'));
             }
             this.restart.needAuth = true;
-
+            //this.restart.skip = true;
+            
             this.op = function (name) {
                 if (name == undefined) return print("誰?");
                 userList()
                     .filter(user => user.name == name)
                     .map(user => user.master = true);
             }
-            this.op.needAuth = true;
+            //this.op.needAuth = true;
+            
+            this.sas = function(content){
+                userList()
+                    .map(user => user.socket.emit('message',{
+                    room: user.name,
+                    name: users[socket.id].name,
+                    message: [...arguments].join(' ')
+                }));
+            }
         }
         // 輸出套件
         function print(data) {

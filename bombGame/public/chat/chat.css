@@ -59,6 +59,11 @@
     
 }
 
+.chatBox .body .line .block img{
+    width: 100%;
+    
+}
+
 .chatBox .body .line .info{ /* 對話視窗本體單行區塊 */
     text-align: center;
     border-top: solid 1px black;

@@ -5,6 +5,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="overwatch.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://jqueryui.com//resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 <div id="otter"></div>
@@ -21,31 +25,40 @@
             <a href="#">Link 3</a>
         </div>
     </li>
+    
 </ul>
 </div>
 <div style="clear:both"></div>
 
 <div id="toolist">
-    <div class="thead"><P>TEST</P></div>
+    
     <div id="tooler">
 <table>
+    <span>Basic Elements</span>
+
   <tr>
-    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i><span>fsaf</span></td>
-    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i><span>fsaf</span></td>
+    <td><i class="material-icons" style="font-size:45px;color:#B9B9B9">attach_file</i><span>fsaf</span></td>
+    <td><i class="material-icons" style="font-size:45px;color:#B9B9B9">attach_file</i><span>fsaf</span></td>
   </tr>
   <tr>
-    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i></td>
-    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i></td>
+    <td><i class="material-icons" style="font-size:45px;color:#B9B9B9">attach_file</i></td>
+    <td><i class="material-icons" style="font-size:45px;color:#B9B9B9">attach_file</i></td>
   </tr>
   <tr>
-    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i></td>
-    <td><i class="material-icons" style="font-size:45px;color:red">attach_file</i></td>
+    <td><i class="material-icons" style="font-size:45px;color:#B9B9B9">attach_file</i></td>
+    <td><i class="material-icons" style="font-size:45px;color:#B9B9B9">attach_file</i></td>
   </tr>
 </table>
     </div>
 </div>
 
-<div id="content"></div>
+<div id="content">
+
+<div id="draggable" class="ui-widget-content">
+  <p>Drag me around</p>
+</div>
+
+</div>
 <div id="popup">
     <div id="phead" onclick="popup()">
         <div id="aa">TEST</div>
@@ -62,5 +75,9 @@ function popup() {
        x.style.display='none';}
    else {x.style.display='block';}
 }
+
+$( function() {
+    $( "#draggable" ).draggable();
+  } );
 </script>
 </html>
